@@ -50,7 +50,9 @@ set t_Co=256 " Tell vim terminal supports 256 colors
 execute "set background=dark"
 execute "colorscheme base16-tomorrow"
 
-set number " show current line number
+set number " show absolute line number
+set relativenumber
+hi CursorLineNR ctermfg=yellow
 
 set colorcolumn=79
 
@@ -85,24 +87,9 @@ set clipboard=unnamed
 
 let g:indentLine_enabled=1
 
-" smart tab completion
-function! Smart_TabComplete()
-    let line = getline('.')                         " current line
-
-    let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-    " line to one character right
-    " of the cursor
-    let substr = matchstr(substr, '[^ \t]*$')       " word till cursor
-    if (strlen(substr)==0)                          " nothing to match on empty string
-        return '\<tab>'
-    endif
-    let has_period = match(substr, '\.') != -1      " position of period, if any
-    let has_slash = match(substr, '\/') != -1       " position of slash, if any
-    if (!has_period && !has_slash)
-        return '\<C-X>\<C-P>'                         " existing text matching
-    elseif ( has_slash )
-        return '\<C-X>\<C-F>'                         " file matching
-    else
-        return '\<C-X>\<C-O>'                         " plugin matching
-    endif
-endfunction
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType html setlocal ts=2 sts=2 sw=2 noexpandtab indentkeys-=*<return>
+autocmd FileType jade setlocal ts=2 sts=2 sw=2 noexpandtab
+autocmd FileType crontab setlocal nobackup nowritebackup
