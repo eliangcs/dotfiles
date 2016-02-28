@@ -66,15 +66,19 @@ let g:ctrlp_follow_symlinks=1
 nmap <silent> <leader>t :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
 
-" Remap backspace so that we can use <c-h> for navigate splits
-if has('nvim')
-    nmap <BS> <C-W>h
-endif
+" Split navigation
+nmap <silent> <leader>h :wincmd h<cr>
+nmap <silent> <leader>j :wincmd j<cr>
+nmap <silent> <leader>k :wincmd k<cr>
+nmap <silent> <leader>l :wincmd l<cr>
 
-nmap <silent> <c-h> :wincmd h<cr>
-nmap <silent> <c-j> :wincmd j<cr>
-nmap <silent> <c-k> :wincmd k<cr>
-nmap <silent> <c-l> :wincmd l<cr>
+" Tab navigation
+nnoremap <silent> <c-h> :tabprev<cr>
+nnoremap <silent> <c-l> :tabnext<cr>
+nnoremap <silent> <c-t> :tabnew<cr>
+inoremap <silent> <c-h> <esc>:tabprev<cr>i
+inoremap <silent> <c-l> <esc>:tabnext<cr>i
+inoremap <silent> <c-t> <esc>:tabnew<cr>
 
 let NERDTreeIgnore=['\.pyc$']
 
