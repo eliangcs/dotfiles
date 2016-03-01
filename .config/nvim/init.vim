@@ -2,14 +2,16 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
+" Plug 'nvie/vim-flake8'
+" Plug 'edkolev/tmuxline.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'chriskempson/base16-vim' " colorschemes
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
-"Plug 'edkolev/tmuxline.vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'ntpeters/vim-better-whitespace' " strip trailing spaces
-Plug 'nvie/vim-flake8'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'  " file tree view
+Plug 'scrooloose/syntastic' " linters
 Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'vim-airline/vim-airline' " fancy status bar
@@ -83,7 +85,6 @@ inoremap <silent> <c-t> <esc>:tabnew<cr>
 let NERDTreeIgnore=['\.pyc$']
 
 autocmd BufWritePre * StripWhitespace
-autocmd BufWritePost *.py call Flake8()
 
 set listchars=eol:$
 
