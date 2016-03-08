@@ -93,6 +93,8 @@ inoremap <silent> <c-t> <esc>:tabnew<cr>
 
 nmap <silent> <c-o> :CtrlPCommandPalette<cr>
 
+nmap <silent> <c-[> :pop<cr>
+
 let NERDTreeIgnore=['\.pyc$']
 
 autocmd BufWritePre * StripWhitespace
