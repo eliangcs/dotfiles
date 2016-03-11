@@ -23,6 +23,7 @@ Plug 'vim-airline/vim-airline' " fancy status bar
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine' " indent guidelines
 Plug 'dbeecham/ctrlp-commandpalette.vim'
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -63,7 +64,9 @@ execute "colorscheme base16-tomorrow"
 
 set number " show absolute line number
 set relativenumber
+
 hi CursorLineNR ctermfg=yellow
+hi Search ctermfg=black
 
 set colorcolumn=79
 
@@ -73,6 +76,10 @@ let g:airline_theme='base16'
 "set laststatus=2
 
 let g:ctrlp_follow_symlinks=1
+
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\v[\/]dist$',
+    \ }
 
 nmap <silent> <leader>t :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
@@ -117,3 +124,6 @@ let g:ctrlp_commandpalette_autoload_commands = 0
 let g:commandPalette = {
     \ 'CSV: Align/Justify Columns': '1,1000ArrangeColumn',
     \ 'New Tab': 'tabnew'}
+
+" Show full path of the current cursor
+let g:airline#extensions#tagbar#flags = 'f'
