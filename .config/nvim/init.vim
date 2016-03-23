@@ -2,8 +2,10 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
+" Plug 'dbeecham/ctrlp-commandpalette.vim'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'nvie/vim-flake8'
+" Plug 'xolox/vim-easytags'
 Plug 'chrisbra/csv.vim'
 Plug 'chriskempson/base16-vim' " colorschemes
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
@@ -11,7 +13,11 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+Plug 'majutsushi/tagbar'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim' " dependent of gist-vim
+Plug 'mileszs/ack.vim'  " use ack in vim
 Plug 'ntpeters/vim-better-whitespace' " strip trailing spaces
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'  " file tree view
 Plug 'scrooloose/syntastic' " linters
@@ -21,9 +27,8 @@ Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-surround' " quoting/parenthesizing operations
 Plug 'vim-airline/vim-airline' " fancy status bar
 Plug 'vim-airline/vim-airline-themes'
+Plug 'xolox/vim-misc' " dependent of easytags
 Plug 'Yggdroot/indentLine' " indent guidelines
-Plug 'dbeecham/ctrlp-commandpalette.vim'
-Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -85,22 +90,22 @@ nmap <silent> <leader>t :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
 
 " Split navigation
-nmap <silent> <leader>h :wincmd h<cr>
-nmap <silent> <leader>j :wincmd j<cr>
-nmap <silent> <leader>k :wincmd k<cr>
-nmap <silent> <leader>l :wincmd l<cr>
+" nmap <silent> <leader>h :wincmd h<cr>
+" nmap <silent> <leader>j :wincmd j<cr>
+" nmap <silent> <leader>k :wincmd k<cr>
+" nmap <silent> <leader>l :wincmd l<cr>
 
 " Tab navigation
-nnoremap <silent> <c-h> :tabprev<cr>
-nnoremap <silent> <c-l> :tabnext<cr>
-nnoremap <silent> <c-t> :tabnew<cr>
-inoremap <silent> <c-h> <esc>:tabprev<cr>i
-inoremap <silent> <c-l> <esc>:tabnext<cr>i
-inoremap <silent> <c-t> <esc>:tabnew<cr>
+" nnoremap <silent> <c-h> :tabprev<cr>
+" nnoremap <silent> <c-l> :tabnext<cr>
+" nnoremap <silent> <c-t> :tabnew<cr>
+" inoremap <silent> <c-h> <esc>:tabprev<cr>i
+" inoremap <silent> <c-l> <esc>:tabnext<cr>i
+" inoremap <silent> <c-t> <esc>:tabnew<cr>
 
 nmap <silent> <c-o> :CtrlPCommandPalette<cr>
 
-nmap <silent> <c-[> :pop<cr>
+" nmap <silent> <c-[> :pop<cr>
 
 let NERDTreeIgnore=['\.pyc$']
 
@@ -120,10 +125,6 @@ autocmd FileType jade setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType crontab setlocal nobackup nowritebackup
 
 let g:ctrlp_commandpalette_autoload_commands = 0
-
-let g:commandPalette = {
-    \ 'CSV: Align/Justify Columns': '1,1000ArrangeColumn',
-    \ 'New Tab': 'tabnew'}
 
 " Show full path of the current cursor
 let g:airline#extensions#tagbar#flags = 'f'
