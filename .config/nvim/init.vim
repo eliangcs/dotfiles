@@ -35,7 +35,7 @@ call plug#end()
 " General
 
 set nocompatible " not compatible with vi
-set autoread " detect when a file is changed
+set noautoread " don't auto reload when file changed
 
 let mapleader=','
 
@@ -124,7 +124,13 @@ autocmd FileType html setlocal ts=2 sts=2 sw=2 noexpandtab indentkeys-=*<return>
 autocmd FileType jade setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType crontab setlocal nobackup nowritebackup
 
+" Detect file change
+" autocmd FileChangedShell * echo "Warning: File changed on disk"
+" autocmd CursorHold,CursorHoldI * silent! checktime
+
 let g:ctrlp_commandpalette_autoload_commands = 0
 
 " Show full path of the current cursor
 let g:airline#extensions#tagbar#flags = 'f'
+
+let g:syntastic_python_checkers = ['flake8']
