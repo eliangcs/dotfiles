@@ -89,8 +89,6 @@ let g:ctrlp_custom_ignore = {
 nmap <silent> <leader>t :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
 
-let NERDTreeShowHidden=1
-
 " Split navigation
 " nmap <silent> <leader>h :wincmd h<cr>
 " nmap <silent> <leader>j :wincmd j<cr>
@@ -109,7 +107,8 @@ nmap <silent> <c-o> :CtrlPCommandPalette<cr>
 
 " nmap <silent> <c-[> :pop<cr>
 
-let NERDTreeIgnore=['\.pyc$', '\.git', '\.tox', '\.cache', '\.egg-info']
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.pyc$', '\.git', '\.tox', '\.cache', '\.egg-info', '__pycache__']
 
 autocmd BufWritePre * StripWhitespace
 
