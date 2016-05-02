@@ -135,3 +135,9 @@ let g:ctrlp_commandpalette_autoload_commands = 0
 let g:airline#extensions#tagbar#flags = 'f'
 
 let g:syntastic_python_checkers = ['flake8']
+
+" Highlight current word
+nmap <silent> <leader>c :let @/= '\<'.expand("<cword>").'\>'<cr>:set hls<cr>
+
+" Toggle search highlighting
+nmap <silent> <leader>h :set hlsearch!<cr>
