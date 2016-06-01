@@ -144,3 +144,6 @@ nmap <silent> <leader>h :set hlsearch!<cr>
 
 " Don't jump to an already-open file
 let g:ctrlp_switch_buffer = 0
+
+" Make IndentLine faster
+let g:indentLine_faster = 1
