@@ -36,6 +36,7 @@ call plug#end()
 
 set nocompatible " not compatible with vi
 set noautoread " don't auto reload when file changed
+set scrolloff=5 " start scrolling x lines away before hitting top/bottom
 
 let mapleader=','
 
