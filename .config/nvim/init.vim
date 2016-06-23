@@ -6,9 +6,11 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'nvie/vim-flake8'
 " Plug 'xolox/vim-easytags'
+Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
 Plug 'chriskempson/base16-vim' " colorschemes
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
+Plug 'easymotion/vim-easymotion'
 Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
@@ -19,6 +21,7 @@ Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim' " dependent of gist-vim
 Plug 'mileszs/ack.vim'  " use ack in vim
 Plug 'ntpeters/vim-better-whitespace' " strip trailing spaces
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'  " file tree view
 Plug 'scrooloose/syntastic' " linters
 Plug 'tomtom/tlib_vim'
@@ -88,7 +91,7 @@ let g:ctrlp_custom_ignore = {
     \ }
 
 nmap <silent> <leader>t :NERDTreeToggle<cr>
-nmap <silent> <leader>y :NERDTreeFind<cr>
+nmap <silent> <leader>f :NERDTreeFind<cr>
 
 " Split navigation
 " nmap <silent> <leader>h :wincmd h<cr>
@@ -148,3 +151,11 @@ let g:ctrlp_switch_buffer = 0
 
 " Make IndentLine faster
 let g:indentLine_faster = 1
+
+" Set Python debugger breakpoint
+au FileType python map <silent> <leader>b oimport ipdb; ipdb.set_trace()<esc>
+au FileType python map <silent> <leader>B Oimport ipdb; ipdb.set_trace()<esc>
+
+" Make CtrlP search based on NERDTree root directory
+let g:NERDTreeChDirMode       = 2
+let g:ctrlp_working_path_mode = 'rw'
