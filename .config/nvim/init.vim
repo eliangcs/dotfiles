@@ -146,6 +146,9 @@ nmap <silent> <leader>c :let @/= '\<'.expand("<cword>").'\>'<cr>:set hls<cr>
 " Toggle search highlighting
 nmap <silent> <leader>h :set hlsearch!<cr>
 
+" Highlight color
+hi Search cterm=NONE ctermfg=white ctermbg=19
+
 " Don't jump to an already-open file
 let g:ctrlp_switch_buffer = 0
 
