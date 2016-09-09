@@ -87,7 +87,7 @@ let g:airline_theme='base16'
 let g:ctrlp_follow_symlinks=1
 
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/]dist$',
+    \ 'dir': '\v[\/](build|dist)$',
     \ }
 
 nmap <silent> <leader>t :NERDTreeToggle<cr>
