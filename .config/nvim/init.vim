@@ -140,6 +140,12 @@ let g:airline#extensions#tagbar#flags = 'f'
 
 let g:syntastic_python_checkers = ['flake8']
 
+" Populate vim loclist once syntastic finds errors, making it navigatable
+" with :lnext and :lprev right away
+let g:syntastic_always_populate_loc_list = 1
+nmap <silent> <leader>n :lnext<cr>
+nmap <silent> <leader>N :lprev<cr>
+
 " Highlight current word
 nmap <silent> <leader>c :let @/= '\<'.expand("<cword>").'\>'<cr>:set hls<cr>
 
