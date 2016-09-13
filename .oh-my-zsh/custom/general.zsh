@@ -15,3 +15,15 @@ c() {
     TZ=Asia/Tokyo date +"%Y-%m-%d %H:%M %z Tokyo"
     TZ=Australia/Sydney date +"%Y-%m-%d %H:%M %z Sydney"
 }
+
+# Colorize log
+colorlog() {
+    esc=$(printf '\033')
+    sed -E "\
+s#\[([^]]+)\]#${esc}[1;35m[\1]${esc}[0m#; \
+s#WARNING#${esc}[33m&${esc}[0m#; \
+s#ERROR#${esc}[31m&${esc}[0m#; \
+s#INFO#${esc}[36m&${esc}[0m#; \
+s#DEBUG#${esc}[32m&${esc}[0m#; \
+s#[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}[^ \t]*#${esc}[1;34m&${esc}[0m#"
+}
