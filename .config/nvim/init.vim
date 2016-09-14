@@ -5,7 +5,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'dbeecham/ctrlp-commandpalette.vim'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'nvie/vim-flake8'
-" Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-easytags'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
 Plug 'chriskempson/base16-vim' " colorschemes
@@ -174,3 +174,6 @@ let g:ctrlp_working_path_mode = 'rw'
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+" Update ctags files in background
+let g:easytags_async = 1
