@@ -19,7 +19,7 @@ Plug 'majutsushi/tagbar'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim' " dependent of gist-vim
-Plug 'mileszs/ack.vim'  " use ack in vim
+Plug 'mileszs/ack.vim'  " use ack/ag in vim
 Plug 'ntpeters/vim-better-whitespace' " strip trailing spaces
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'  " file tree view
@@ -169,3 +169,8 @@ au FileType python map <silent> <leader>B Oimport ipdb; ipdb.set_trace()<esc>
 " Make CtrlP search based on NERDTree root directory
 let g:NERDTreeChDirMode       = 2
 let g:ctrlp_working_path_mode = 'rw'
+
+" Use ag if possible
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
