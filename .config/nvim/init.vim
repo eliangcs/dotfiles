@@ -11,7 +11,6 @@ Plug 'chrisbra/csv.vim'
 Plug 'chriskempson/base16-vim' " colorschemes
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plug 'easymotion/vim-easymotion'
-Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -177,3 +176,6 @@ endif
 
 " Update ctags files in background
 let g:easytags_async = 1
+
+" Jump to anywhere visible on the screen
+nmap <leader>s <Plug>(easymotion-s2)
