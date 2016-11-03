@@ -3,6 +3,8 @@ export EDITOR=nvim
 export LANG=en_US.utf-8
 export LC_ALL=en_US.utf-8
 
+export PATH=$PATH:$HOME/.local/bin
+
 # World clock
 c() {
     TZ=America/Los_Angeles date +"%Y-%m-%d %H:%M %z Los Angeles"
