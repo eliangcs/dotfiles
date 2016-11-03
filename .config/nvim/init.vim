@@ -5,12 +5,12 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'dbeecham/ctrlp-commandpalette.vim'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'nvie/vim-flake8'
-Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-easytags'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
 Plug 'chriskempson/base16-vim' " colorschemes
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -175,7 +175,7 @@ if executable('ag')
 endif
 
 " Update ctags files in background
-let g:easytags_async = 1
+" let g:easytags_async = 1
 
 " Jump to anywhere visible on the screen
-nmap <leader>s <Plug>(easymotion-s2)
+" nmap <leader>s <Plug>(easymotion-s2)
