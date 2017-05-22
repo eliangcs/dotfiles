@@ -13,7 +13,7 @@ c() {
     TZ=Europe/London date +"%Y-%m-%d %H:%M %z London"
     TZ=Europe/Berlin date +"%Y-%m-%d %H:%M %z Berlin"
     TZ=Europe/Moscow date +"%Y-%m-%d %H:%M %z Moscow"
-    TZ=Europe/Taipei date +"%Y-%m-%d %H:%M %z Taipei"
+    TZ=Asia/Taipei date +"%Y-%m-%d %H:%M %z Taipei"
     TZ=Asia/Tokyo date +"%Y-%m-%d %H:%M %z Tokyo"
     TZ=Australia/Sydney date +"%Y-%m-%d %H:%M %z Sydney"
 }
@@ -29,3 +29,7 @@ s#INFO#${esc}[36m&${esc}[0m#; \
 s#DEBUG#${esc}[32m&${esc}[0m#; \
 s#[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}[^ \t]*#${esc}[1;34m&${esc}[0m#"
 }
+
+export DISABLE_AUTO_TITLE='true'
+
+alias wt="watson"
