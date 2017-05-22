@@ -28,3 +28,7 @@ if sys.version_info[0] == 2:
     import cStringIO
     import urllib2
     import urlparse
+
+if sys.version_info[0] == 3:
+    from importlib import reload
+    from urllib.parse import urlparse, urljoin
