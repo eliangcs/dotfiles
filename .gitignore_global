@@ -1,4 +1,6 @@
 *.pyc
+.cache
 .DS_Store
 .pt
+_gems
 _site-packages
