@@ -23,7 +23,7 @@ Plug 'mileszs/ack.vim'  " use ack/ag in vim
 Plug 'ntpeters/vim-better-whitespace' " strip trailing spaces
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'  " file tree view
-Plug 'scrooloose/syntastic' " linters
+" Plug 'scrooloose/syntastic' " linters
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'tpope/vim-fugitive' " git wrapper
@@ -33,6 +33,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'xolox/vim-misc' " dependent of easytags
 Plug 'Yggdroot/indentLine' " indent guidelines
 Plug 'posva/vim-vue'
+Plug 'w0rp/ale'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
@@ -89,7 +91,7 @@ let g:ctrlp_follow_symlinks=1
 let g:ctrlp_max_files=0
 
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/](build|dist|node_modules)$',
+    \ 'dir': '\v[\/](dist|node_modules)$',
     \ }
 
 nmap <silent> <leader>t :NERDTreeToggle<cr>
@@ -130,6 +132,7 @@ autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jade setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType vue setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType crontab setlocal nobackup nowritebackup
 
 " Detect file change
@@ -141,11 +144,11 @@ autocmd FileType crontab setlocal nobackup nowritebackup
 " Show full path of the current cursor
 let g:airline#extensions#tagbar#flags = 'f'
 
-let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_checkers = ['flake8']
 
 " Populate vim loclist once syntastic finds errors, making it navigatable
 " with :lnext and :lprev right away
-let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_always_populate_loc_list = 1
 nmap <silent> <leader>n :lnext<cr>
 nmap <silent> <leader>N :lprev<cr>
 
@@ -185,3 +188,13 @@ endif
 
 " Jump to anywhere visible on the screen
 " nmap <leader>s <Plug>(easymotion-s2)
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8']
+\}
+
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+
+let g:jsx_ext_required = 0

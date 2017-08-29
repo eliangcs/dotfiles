@@ -8,6 +8,7 @@ export PATH=$PATH:$HOME/.local/bin
 # World clock
 c() {
     TZ=America/Los_Angeles date +"%Y-%m-%d %H:%M %z Los Angeles"
+    TZ=America/Chicago date +"%Y-%m-%d %H:%M %z Chicago"
     TZ=America/New_York date +"%Y-%m-%d %H:%M %z New York"
     TZ=UTC date +"%Y-%m-%d %H:%M %z UTC"
     TZ=Europe/London date +"%Y-%m-%d %H:%M %z London"
