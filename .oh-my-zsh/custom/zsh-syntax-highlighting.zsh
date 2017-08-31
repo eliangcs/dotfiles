@@ -1,1 +1,1 @@
-/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+/Users/eliang/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
