@@ -1,6 +1,10 @@
 *.pyc
 .cache
 .DS_Store
+.gutctags
 .pt
 _gems
 _site-packages
+tags
+tags.lock
+tags.tmp
