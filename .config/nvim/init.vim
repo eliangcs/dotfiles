@@ -35,6 +35,8 @@ Plug 'Yggdroot/indentLine' " indent guidelines
 Plug 'posva/vim-vue'
 Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
+Plug 'fisadev/vim-isort'  " sort Python imports
+Plug 'ludovicchabant/vim-gutentags'  " manage tags file
 
 call plug#end()
 
@@ -93,6 +95,12 @@ let g:ctrlp_max_files=0
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v[\/](dist|node_modules)$',
     \ }
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
 
 nmap <silent> <leader>t :NERDTreeToggle<cr>
 nmap <silent> <leader>f :NERDTreeFind<cr>
@@ -191,7 +199,7 @@ endif
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'python': ['flake8']
+\   'python': ['flake8', 'pylint']
 \}
 
 let g:ale_lint_on_text_changed = 'never'
@@ -201,8 +209,6 @@ let g:jsx_ext_required = 0
 
 set guicursor=
 
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
-endif
-
 set mouse=a
+
+let g:vim_isort_map = '<C-i>'
