@@ -30,7 +30,7 @@ Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-surround' " quoting/parenthesizing operations
 Plug 'vim-airline/vim-airline' " fancy status bar
 Plug 'vim-airline/vim-airline-themes'
-Plug 'xolox/vim-misc' " dependent of easytags
+" Plug 'xolox/vim-misc' " dependent of easytags
 Plug 'Yggdroot/indentLine' " indent guidelines
 Plug 'posva/vim-vue'
 Plug 'w0rp/ale'
@@ -212,3 +212,5 @@ set guicursor=
 set mouse=a
 
 let g:vim_isort_map = '<C-i>'
+
+nmap <silent> <C-m> :TagbarCurrentTag('%s', '', 'f')<cr>

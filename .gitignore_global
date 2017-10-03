@@ -7,4 +7,4 @@ _gems
 _site-packages
 tags
 tags.lock
-tags.tmp
+tags.temp
