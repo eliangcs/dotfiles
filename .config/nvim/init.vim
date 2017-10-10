@@ -157,8 +157,11 @@ let g:airline#extensions#tagbar#flags = 'f'
 " Populate vim loclist once syntastic finds errors, making it navigatable
 " with :lnext and :lprev right away
 " let g:syntastic_always_populate_loc_list = 1
-nmap <silent> <leader>n :lnext<cr>
-nmap <silent> <leader>N :lprev<cr>
+" nmap <silent> <leader>n :lnext<cr>
+" nmap <silent> <leader>N :lprev<cr>
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Highlight current word
 nmap <silent> <leader>c :let @/= '\<'.expand("<cword>").'\>'<cr>:set hls<cr>
@@ -213,4 +216,33 @@ set mouse=a
 
 let g:vim_isort_map = '<C-i>'
 
-nmap <silent> <C-m> :TagbarCurrentTag('%s', '', 'f')<cr>
+" nmap <silent> <C-m> :TagbarCurrentTag('%s', '', 'f')<cr>
+
+function! DeleteHiddenBuffers()
+  let tpbl=[]
+  let closed = 0
+  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+    if getbufvar(buf, '&mod') == 0
+      silent execute 'bwipeout' buf
+      let closed += 1
+    endif
+  endfor
+  echo "Closed ".closed." hidden buffers"
+endfunction
+
+nmap <silent> <leader>d :call DeleteHiddenBuffers()<cr>
+
+function! GetPythonMethodPath()
+  let file_dotted_path = strpart(substitute(@%, '/', '.', 'g'), 0, strlen(@%)-3)
+  let method_dotted_path = tagbar#currenttag('%s', '', 'f')
+  return file_dotted_path . "." . method_dotted_path
+endfunction
+
+function! CopyPythonMethodPath()
+  let path = GetPythonMethodPath()
+  let @* = path
+  echo "'".path."' copied to clipboard"
+endfunction
+
+nmap <silent> <C-m> :call CopyPythonMethodPath()<cr>
