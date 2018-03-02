@@ -9,7 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
 Plug 'chriskempson/base16-vim' " colorschemes
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
+" Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 " Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
@@ -17,8 +17,8 @@ Plug 'honza/vim-snippets'
 Plug 'leafgarland/typescript-vim'
 Plug 'majutsushi/tagbar'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'mattn/gist-vim'
-Plug 'mattn/webapi-vim' " dependent of gist-vim
+" Plug 'mattn/gist-vim'
+" Plug 'mattn/webapi-vim' " dependent of gist-vim
 Plug 'mileszs/ack.vim'  " use ack/ag in vim
 Plug 'ntpeters/vim-better-whitespace' " strip trailing spaces
 Plug 'rust-lang/rust.vim'
@@ -28,8 +28,8 @@ Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'tpope/vim-surround' " quoting/parenthesizing operations
-Plug 'vim-airline/vim-airline' " fancy status bar
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline' " fancy status bar
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'xolox/vim-misc' " dependent of easytags
 Plug 'Yggdroot/indentLine' " indent guidelines
 Plug 'posva/vim-vue'
@@ -37,6 +37,10 @@ Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
 Plug 'fisadev/vim-isort'  " sort Python imports
 Plug 'ludovicchabant/vim-gutentags'  " manage tags file
+Plug 'ruanyl/vim-gh-line'  " Open this line of code in GitHub
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'aaronj1335/underscore-templates.vim'
 
 call plug#end()
 
@@ -45,6 +49,7 @@ call plug#end()
 set nocompatible " not compatible with vi
 set noautoread " don't auto reload when file changed
 set scrolloff=5 " start scrolling x lines away before hitting top/bottom
+set history=100
 
 let mapleader=','
 
@@ -84,23 +89,23 @@ hi Search ctermfg=black
 
 set colorcolumn=79
 
-let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
+" let g:airline_powerline_fonts=1
+" let g:airline_theme='base16'
 
 "set laststatus=2
 
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_max_files=0
+" let g:ctrlp_follow_symlinks=1
+" let g:ctrlp_max_files=0
 
-let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/](dist|node_modules)$',
-    \ }
+" let g:ctrlp_custom_ignore = {
+"     \ 'dir': '\v[\/](dist|node_modules)$',
+"     \ }
 
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-endif
+" if executable('rg')
+"   set grepprg=rg\ --color=never
+"   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"   let g:ctrlp_use_caching = 0
+" endif
 
 nmap <silent> <leader>t :NERDTreeToggle<cr>
 nmap <silent> <leader>f :NERDTreeFind<cr>
@@ -132,7 +137,11 @@ set listchars=eol:$
 
 set clipboard=unnamed
 
-let g:indentLine_enabled=1
+let g:indentLine_enabled = 1
+let g:indentLine_faster = 1
+let g:indentLine_fileTypeExclude = ['haskell', 'json', 'yaml', 'markdown', 'text', 'sh', 'vim']
+
+autocmd FileType markdown set conceallevel=0  " unhide aterisks in markdown
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
@@ -150,7 +159,7 @@ autocmd FileType crontab setlocal nobackup nowritebackup
 " let g:ctrlp_commandpalette_autoload_commands = 0
 
 " Show full path of the current cursor
-let g:airline#extensions#tagbar#flags = 'f'
+" let g:airline#extensions#tagbar#flags = 'f'
 
 " let g:syntastic_python_checkers = ['flake8']
 
@@ -175,19 +184,15 @@ nmap <silent> <leader>u ^hvk$di <esc>
 hi IncSearch cterm=NONE cterm=NONE ctermfg=white ctermbg=24
 hi Search cterm=NONE ctermfg=white ctermbg=24
 
-" May jump to an already-open file
-let g:ctrlp_switch_buffer = 1
-
-" Make IndentLine faster
-let g:indentLine_faster = 1
-
 " Set Python debugger breakpoint
 au FileType python map <silent> <leader>b oimport ipdb; ipdb.set_trace()<esc>
 au FileType python map <silent> <leader>B Oimport ipdb; ipdb.set_trace()<esc>
 
+au FileType javascript map <silent> <leader>b odebugger;<esc>
+
 " Make CtrlP search based on NERDTree root directory
 let g:NERDTreeChDirMode       = 2
-let g:ctrlp_working_path_mode = 'rw'
+" let g:ctrlp_working_path_mode = 'rw'
 
 " Use ag if possible
 if executable('rg')
@@ -207,6 +212,14 @@ let g:ale_linters = {
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['json'] = ['prettier']
+" let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_options = '--single-quote'
+
+nmap <silent> <leader>x :ALEFix<cr>
 
 let g:jsx_ext_required = 0
 
@@ -246,3 +259,71 @@ function! CopyPythonMethodPath()
 endfunction
 
 nmap <silent> <C-m> :call CopyPythonMethodPath()<cr>
+
+let g:gh_use_canonical = 1
+
+" Lightline
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['filename', 'modified'], ['tag']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component': {
+\   'tag': '%{tagbar#currenttag("%s", "", "f")}'
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ }
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+autocmd User ALELint call s:MaybeUpdateLightline()
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always'.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+nmap <silent> ; :Buffers<cr>
+nmap <silent> <C-p> :Files<cr>
+nmap <silent> <C-l> :Tags<cr>
+nmap <silent> <C-i> :Rg<cr>
+
+au BufRead,BufNewFile *.template.js set syntax=underscore_template
