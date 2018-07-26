@@ -7,7 +7,11 @@ git_describe() {
 my_git_prompt_info() {
     prompt=$(git_prompt_info)
     if [ ! -z "$prompt" ]; then
-        echo "$(git_describe) ($(git_prompt_info))"
+        if [[ $PWD = /Users/eliang/Projects/zapier ]]; then
+            echo "($(git_prompt_info))"
+        else
+            echo "$(git_describe) ($(git_prompt_info))"
+        fi
     fi
 }
 

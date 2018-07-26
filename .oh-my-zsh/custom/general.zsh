@@ -34,3 +34,13 @@ s#[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}[^ \t]*#${esc}[1;34m&${esc}[0m#"
 export DISABLE_AUTO_TITLE='true'
 
 alias wt="watson"
+
+httplogger() {
+    while true; do
+        echo -e "HTTP/1.1 200 OK\r\n\r\nok" | nc -vl 8989
+        test $? -gt 128 && break
+        echo
+        echo '----------------------------------------'
+    done
+    echo
+}

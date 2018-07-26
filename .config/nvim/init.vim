@@ -19,7 +19,7 @@ Plug 'majutsushi/tagbar'
 Plug 'MarcWeber/vim-addon-mw-utils'
 " Plug 'mattn/gist-vim'
 " Plug 'mattn/webapi-vim' " dependent of gist-vim
-Plug 'mileszs/ack.vim'  " use ack/ag in vim
+" Plug 'mileszs/ack.vim'  " use ack/ag in vim
 Plug 'ntpeters/vim-better-whitespace' " strip trailing spaces
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'  " file tree view
@@ -36,11 +36,13 @@ Plug 'posva/vim-vue'
 Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
 Plug 'fisadev/vim-isort'  " sort Python imports
-Plug 'ludovicchabant/vim-gutentags'  " manage tags file
+" Plug 'ludovicchabant/vim-gutentags'  " manage tags file
 Plug 'ruanyl/vim-gh-line'  " Open this line of code in GitHub
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'aaronj1335/underscore-templates.vim'
+Plug 'elzr/vim-json'
+" Plug 'thaerkh/vim-indentguides'
 
 call plug#end()
 
@@ -195,9 +197,9 @@ let g:NERDTreeChDirMode       = 2
 " let g:ctrlp_working_path_mode = 'rw'
 
 " Use ag if possible
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
-endif
+" if executable('rg')
+"   let g:ackprg = 'rg --vimgrep'
+" endif
 
 " Update ctags files in background
 " let g:easytags_async = 1
@@ -216,8 +218,10 @@ let g:ale_lint_on_enter = 0
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['json'] = ['prettier']
+"let g:ale_fixers['python'] = ['black']
 " let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_options = '--single-quote'
+"let g:ale_python_black_executable = '/Users/eliang/.pyenv/versions/3.6.2/bin/black'
 
 nmap <silent> <leader>x :ALEFix<cr>
 
@@ -316,7 +320,7 @@ endfunction
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always'.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -324,6 +328,12 @@ command! -bang -nargs=* Rg
 nmap <silent> ; :Buffers<cr>
 nmap <silent> <C-p> :Files<cr>
 nmap <silent> <C-l> :Tags<cr>
+nmap <silent> <C-k> :Tags <c-r><c-w><cr>
 nmap <silent> <C-i> :Rg<cr>
 
 au BufRead,BufNewFile *.template.js set syntax=underscore_template
+
+:command W w
+
+" Fixes error color in cursorline
+hi Error cterm=reverse ctermbg=white ctermfg=red
